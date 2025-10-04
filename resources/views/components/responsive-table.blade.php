@@ -1,22 +1,29 @@
-<!--
-  This is a responsive table component.
-
-  To use it in your Laravel Blade templates:
-  <x-responsive-table :headers="['Header 1', 'Header 2', 'Header 3']" :rows="[['Data 1.1', 'Data 1.2', 'Data 1.3'], ['Data 2.1', 'Data 2.2', 'Data 2.3']]"/>
-
-  - `:headers` is an array of strings for the table headers.
-  - `:rows` is an array of arrays, where each inner array represents a row.
--->
-
 @props([
     'headers' => [],
-    'rows' => [],
 ])
+
+<style>
+  @media screen and (max-width: 768px) {
+    .responsive-table thead {
+      @apply hidden;
+    }
+    .responsive-table tr {
+      @apply block mb-4 border-b-2;
+    }
+    .responsive-table td {
+      @apply block text-right;
+    }
+    .responsive-table td::before {
+      content: attr(data-label);
+      @apply float-left font-bold uppercase;
+    }
+  }
+</style>
 
 <div class="overflow-x-auto">
   <div class="min-w-full inline-block align-middle">
     <div class="overflow-hidden border rounded-lg">
-      <table class="min-w-full divide-y divide-gray-200">
+      <table class="min-w-full divide-y divide-gray-200 responsive-table">
         <thead class="bg-gray-50">
           <tr>
             @foreach ($headers as $header)
@@ -27,15 +34,7 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
-          @foreach ($rows as $row)
-            <tr>
-              @foreach ($row as $cell)
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                  {{ $cell }}
-                </td>
-              @endforeach
-            </tr>
-          @endforeach
+          {!! $body !!}
         </tbody>
       </table>
     </div>

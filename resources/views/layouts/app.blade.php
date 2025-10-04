@@ -8,7 +8,7 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen ">
-        @include('layouts.partials.bg')cl
+        @include('layouts.partials.bg')
         @include('layouts.navigation')
         
 
